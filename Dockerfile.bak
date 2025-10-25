@@ -1,0 +1,24 @@
+# 步骤 1: 使用 TensorFlow 官方发布的、包含 Python 3.10 的 CPU 镜像作为基础
+# 这个镜像已经为你配置好了所有运行 TensorFlow 所需的系统环境
+FROM tensorflow/tensorflow:2.16.1-cpu
+
+# 步骤 2: 设置工作目录
+WORKDIR /app
+
+# 步骤 3: 复制 requirements.txt 文件
+# 这个文件现在只包含除了TensorFlow以外的其他依赖
+COPY requirements.txt .
+
+# 步骤 4: 安装其他依赖库
+# TensorFlow 已经包含在基础镜像中，我们只需要安装 Gradio 等
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 步骤 5: 复制你的所有项目文件（app.py, 模型, 标签等）
+COPY . .
+
+# 步骤 6: 暴露 Gradio 运行的端口
+EXPOSE 7860
+
+# 步骤 7: 设置容器启动时执行的命令
+# 我们不再需要设置任何环境变量，因为这个镜像是为CPU优化的
+CMD ["python", "app.py"]
