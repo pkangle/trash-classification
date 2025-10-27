@@ -71,7 +71,7 @@ flowchart LR
     F --> G[📊 后处理模块<br/>(解析最高概率)]
     G -->|类别 + 置信度| B
     B -->|返回结果| A
-
+```
 ## **4\. 数据集构建 (Dataset)**
 
 高质量的数据集是模型性能的基石。本项目通过定制化的数据工程流程，构建了一个兼具多样性与高质量的统一训练源。
@@ -144,27 +144,14 @@ flowchart LR
 
 在实时识别测试中，系统能够通过摄像头流畅获取视频流，并实时显示识别结果（类别及置信度），在大多数情况下识别准确。
 
-## **7\. 项目结构 (Project Structure)**
 
-real-time-waste-classification/  
-├── app.py                  \# Gradio Web UI 和模型加载/推理逻辑  
-├── requirements.txt        \# Python 依赖库列表  
-├── Dockerfile              \# Docker 容器化配置  
-├── notebooks/  
-│   └── train\_model.ipynb   \# 包含数据探索、两阶段迁移学习的详细训练过程  
-├── saved\_models/  
-│   └── best\_model\_finetuned.keras \# 最终训练好的模型文件  
-├── data\_preprocessing/     \# 数据集处理脚本 (TACO JSON解析, 数据集合并)  
-├── config.py               \# (可选) 项目配置，如类别名称、路径等  
-└── README.md               \# 本文档
-
-## **8\. 未来展望 (Future Work)**
+## **7\. 未来展望 (Future Work)**
 
 * **模型优化：** 进一步优化模型结构和训练策略（例如引入注意力机制），提高模型在复杂场景下（如光线不足、遮挡）的鲁棒性。  
 * **数据扩展：** 收集更丰富、更多样化的垃圾图像数据，增加模型对各种实际场景的适应能力。  
 * **边缘部署：** 探索将模型转换为 TFLite 格式，并在 Jetson Nano / 树莓派等边缘计算设备上部署，实现更低成本的智能垃圾桶方案。
 
-## **9\. 作者与致谢 (Authors & Acknowledgments)**
+## **8\. 作者与致谢 (Authors & Acknowledgments)**
 
 💼 GitHub: [@pkangle](https://github.com/pkangle)
 
