@@ -11,10 +11,9 @@
 5. [模型方法 (Methodology)](#bookmark=id.kmvf2e6rcz9b)  
    * [5.1 基础模型选择 (MobileNetV2)](#bookmark=id.lnry086a1885)  
    * [5.2 两阶段训练策略 (Two-Stage Training)](#bookmark=id.4tele2y5fodg)  
-6. [实验与结果 (Experiments & Results)](#bookmark=id.f9f1hgpqrg3n)  
-7. [项目结构 (Project Structure)](#bookmark=id.pny66lychqeg)  
-8. [未来展望 (Future Work)](#bookmark=id.jpbt72kqp5d)  
-9. [作者与致谢 (Authors & Acknowledgments)](#bookmark=id.6cez1y9n1q6i)
+6. [实验与结果 (Experiments & Results)](#bookmark=id.f9f1hgpqrg3n)   
+7. [未来展望 (Future Work)](#bookmark=id.jpbt72kqp5d)  
+8. [作者与致谢 (Authors & Acknowledgments)](#bookmark=id.6cez1y9n1q6i)
 
 ## **1\. 项目概述 (Overview)**
 
@@ -62,31 +61,16 @@ Docker 是运行本项目最简单、最推荐的方式，它确保了环境的�
 
 本系统采用前后端分离的逻辑，Gradio 负责前端 UI 展示和视频流捕获，Python 后端负责模型推理。
 
-\[ 用户 (User) \]  
-     |  
-     v  
-\[ 1\. 前端 (Gradio 界面) \]  
-     |  ^  
-(实时捕获视频流) |  | (7. 返回结果)  
-     |  |  
-     v  |  
-\[ 2\. 摄像头帧 (NumPy) \]  
-     |  
-(3. 发送单帧图像)  
-     |  
-     v  
-\[ 4\. 后端 (Python 服务器) \]  
-     |  
-     v  
-\[ 5\. 预处理模块 \] (调整尺寸, 归一化)  
-     |  
-     v  
-\[ 6\. 模型推理 \] (加载 .keras 模型)  
-     |  
-     v  
-\[ 7\. 后处理模块 \] (解析最高概率)  
-     |  
-(将 (类别 \+ 置信度) 返回前端)
+```mermaid
+flowchart LR
+    A[👤 用户 / User] --> B[💻 前端 (Gradio 界面)]
+    B -->|实时捕获视频流| C[📷 摄像头帧 (NumPy)]
+    C -->|发送单帧图像| D[🧠 后端 (Python 服务器)]
+    D --> E[⚙️ 预处理模块<br/>(调整尺寸, 归一化)]
+    E --> F[🔍 模型推理<br/>(加载 .keras 模型)]
+    F --> G[📊 后处理模块<br/>(解析最高概率)]
+    G -->|类别 + 置信度| B
+    B -->|返回结果| A
 
 ## **4\. 数据集构建 (Dataset)**
 
