@@ -61,32 +61,9 @@ Docker 是运行本项目最简单、最推荐的方式，它确保了环境的�
 
 本项目采用前后端分离的逻辑，以下是实时识别系统的主要数据流向：
 
-graph TD  
-    subgraph Frontend \[前端 Gradio 应用\]  
-        A\[用户 (User)\] \--\> B(1. Gradio 界面);  
-        B \--\> C(2. 捕获摄像头帧);  
-        C \--\> D\[2. 单帧图像 (NumPy)\];  
-    end
-
-    subgraph Backend \[后端 Python 服务器 (app.py)\]  
-        D \--\> E(3. 接收单帧图像);  
-        E \--\> F\[5. 预处理模块\];  
-        F \--\> G\[6. MobileNetV2 模型推理\];  
-        G \--\> H\[7. 后处理模块 (解析类别/置信度)\];  
-        H \--\> I\[8. 结果 (类别 & 置信度)\];  
-    end
-
-    style Frontend fill:\#c8e6c9,stroke:\#388e3c,stroke-width:2px;  
-    style Backend fill:\#bbdefb,stroke:\#1976d2,stroke-width:2px;  
-    style G fill:\#ffcc80,stroke:\#f57c00,stroke-width:2px;
-
-    I \--\> B;
-
-    %% 详细描述连接  
-    C \-. 实时视频流 .-\> B  
-    E \-. 模型加载 .-\> G  
-    G \-. 推理结果 .-\> H  
-    H \-. 返回前端 .-\> I
+<p align="center">
+    <img src="assets/system_workflow.png" alt="系统实时识别工作流程图" width="600"/>
+</p>
 
 ### **流程说明**
 
